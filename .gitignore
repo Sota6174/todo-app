@@ -75,3 +75,8 @@ out/
 # Temporary files
 tmp/
 temp/
+
+# その他のファイル
+Git.md
+計画.md
+CLAUDE.md
