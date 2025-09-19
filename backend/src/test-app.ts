@@ -1,24 +1,20 @@
-import { serve } from '@hono/node-server'
+// テスト専用のアプリケーション設定 - サーバー起動を含まない
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import todosRouter from './routes/todos.js'
-import { initializeSampleData } from './store/todoStore.js'
 
-// Honoアプリケーションインスタンスを作成
-const app = new Hono()
+// Honoアプリケーションインスタンスを作成（テスト用）
+const testApp = new Hono()
 
 // CORS設定 - フロントエンド（localhost:5173）からのアクセスを許可
-app.use('/*', cors({
+testApp.use('/*', cors({
   origin: ['http://localhost:5173'],  // Viteの開発サーバーからのアクセスを許可
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowHeaders: ['Content-Type', 'Authorization']
 }))
 
-// サンプルデータを初期化（開発用）
-initializeSampleData()
-
 // ルートエンドポイント - サーバー稼働確認用
-app.get('/', (c) => {
+testApp.get('/', (c) => {
   return c.json({
     message: 'Todo API Server is running!',
     version: '1.0.0',
@@ -29,10 +25,10 @@ app.get('/', (c) => {
 })
 
 // API ルートグループの設定
-app.route('/api/todos', todosRouter)
+testApp.route('/api/todos', todosRouter)
 
 // ヘルスチェックエンドポイント
-app.get('/health', (c) => {
+testApp.get('/health', (c) => {
   return c.json({
     status: 'OK',
     timestamp: new Date().toISOString()
@@ -40,7 +36,7 @@ app.get('/health', (c) => {
 })
 
 // 404エラーハンドリング
-app.notFound((c) => {
+testApp.notFound((c) => {
   return c.json({
     success: false,
     error: 'エンドポイントが見つかりません',
@@ -48,15 +44,4 @@ app.notFound((c) => {
   }, 404)
 })
 
-// テスト用にappをエクスポート
-export default app
-
-// サーバー起動（ポート3001に変更して計画書に合わせる）
-serve({
-  fetch: app.fetch,
-  port: 3001
-}, (info) => {
-  console.log(`🚀 Todo API Server is running on http://localhost:${info.port}`)
-  console.log(`📝 API Documentation: http://localhost:${info.port}/api/todos`)
-  console.log(`💊 Health Check: http://localhost:${info.port}/health`)
-})
+export default testApp
