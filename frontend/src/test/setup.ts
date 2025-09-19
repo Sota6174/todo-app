@@ -20,7 +20,7 @@ Object.defineProperty(window, 'matchMedia', {
 })
 
 // window.ResizeObserverのモック（レスポンシブコンポーネントテスト用）
-;(globalThis as any).ResizeObserver = vi.fn().mockImplementation(() => ({
+;(globalThis as typeof globalThis & { ResizeObserver: unknown }).ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -28,7 +28,7 @@ Object.defineProperty(window, 'matchMedia', {
 
 // fetch APIのモック設定（API通信テスト用）
 const mockFetch = vi.fn()
-;(globalThis as any).fetch = mockFetch
+;(globalThis as typeof globalThis & { fetch: unknown }).fetch = mockFetch
 
 // テスト前後の自動クリーンアップ設定
 beforeEach(() => {
