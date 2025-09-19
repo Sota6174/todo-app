@@ -174,8 +174,6 @@ describe('TodoItem Component', () => {
       expect(mockOnDelete).toHaveBeenCalledTimes(1)
       expect(mockOnDelete).toHaveBeenCalledWith(mockTodo.id)
     })
-
-    // タイトルクリックでの切り替え機能は実装されていないため、このテストは削除
   })
 
   // 条件付きレンダリングテスト
@@ -257,7 +255,6 @@ describe('TodoItem Component', () => {
 
       const checkbox = screen.getByRole('checkbox')
       expect(checkbox).toBeChecked()
-      // HTML inputのcheckboxは標準でaria-checked属性を持たないため、checked属性で十分
     })
   })
 
