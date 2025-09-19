@@ -78,6 +78,12 @@ export const deleteTodo = (id: string): boolean => {
   return true;
 };
 
+// テスト用にTodoリストをクリア
+export const clearTodos = (): void => {
+  todos = [];
+  idCounter = 1; // IDカウンターもリセット
+};
+
 // テスト用のサンプルデータを初期化
 export const initializeSampleData = (): void => {
   const now = new Date();
