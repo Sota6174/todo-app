@@ -1,3 +1,24 @@
+/**
+ * Todoアプリケーション バックエンドAPIテスト
+ *
+ * 【テスト対象】
+ * - Todo CRUD操作（作成・読取・更新・削除）のAPIエンドポイント
+ * - エラーハンドリング（バリデーション、存在しないリソース）
+ * - ヘルスチェック機能とサーバー状態確認
+ *
+ * 【テスト項目】
+ * 1. ヘルスチェック（GET /、GET /health）
+ * 2. Todo一覧取得（GET /api/todos）
+ * 3. Todo作成（POST /api/todos）
+ * 4. Todo完了状態切り替え（PATCH /api/todos/:id/toggle）
+ * 5. Todo削除（DELETE /api/todos/:id）
+ * 6. Todo個別取得（GET /api/todos/:id）
+ * 7. エラーハンドリング（404、不正JSON）
+ *
+ * 【重要度】★★★ 必須テスト
+ * API仕様の正確性とデータ整合性を保証する基本的なテストスイート
+ */
+
 import { describe, it, expect, beforeEach } from 'vitest'
 import testApp from '../test-app.js'
 import { clearTodos, initializeSampleData } from '../store/todoStore.js'
@@ -263,8 +284,8 @@ describe('Todo API Tests', () => {
     })
   })
 
-  // 404エラーテスト
-  describe('GET /nonexistent', () => {
+  // エラーハンドリングテスト
+  describe('Error Handling', () => {
     it('存在しないエンドポイントは404エラーを返す', async () => {
       const response = await testApp.request('/nonexistent')
 
@@ -276,6 +297,18 @@ describe('Todo API Tests', () => {
         error: 'エンドポイントが見つかりません',
         path: '/nonexistent'
       })
+    })
+
+    it('不正なJSONでリクエストした場合はエラーを返す', async () => {
+      const response = await testApp.request('/api/todos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: 'invalid json'
+      })
+
+      expect(response.status).toBe(400)
     })
   })
 })
