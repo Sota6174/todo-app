@@ -12,7 +12,12 @@
     "build": "npm run build:frontend && npm run build:backend",
     "start:frontend": "cd frontend && npm run preview",
     "start:backend": "cd backend && npm start",
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "test:frontend": "cd frontend && npm test",
+    "test:backend": "cd backend && npm test",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:watch": "concurrently \"npm run test:backend -- --watch\" \"npm run test:frontend -- --watch\"",
+    "test:coverage": "concurrently \"npm run test:backend -- --coverage\" \"npm run test:frontend -- --coverage\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
