@@ -1,0 +1,409 @@
+/* Todoアプリのメインスタイル */
+
+/* アプリ全体のコンテナ - 中央寄せと最大幅を設定して読みやすさを向上 */
+.app {
+  max-width: 800px; /* コンテンツの最大幅を制限して長いテキストを読みやすくする */
+  margin: 0 auto; /* 中央寄せレイアウト */
+  padding: 20px; /* 画面端からの余白を確保 */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* システムフォントを使用してパフォーマンスとネイティブ感を向上 */
+  line-height: 1.6; /* 行間を広げて読みやすさを向上 */
+  color: #333; /* 純黒より柔らかいダークグレーでコントラストを良好に保つ */
+}
+
+/* ヘッダーセクション - アプリのタイトルと説明を表示 */
+.app-header {
+  text-align: center; /* テキストを中央寄せ */
+  margin-bottom: 2rem; /* 下部に十分な余白を確保 */
+  padding: 1.5rem; /* 内側の余白でコンテンツとボーダーの間隔を調整 */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* モダンな印象を与えるグラデーション背景 */
+  color: white; /* グラデーション背景に対する高コントラストのテキスト色 */
+  border-radius: 12px; /* 角を丸くしてモダンなデザインに */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽いシャドウで要素に立体感を付与 */
+}
+
+/* ヘッダータイトルのスタイリング */
+.app-header h1 {
+  margin: 0 0 0.5rem 0; /* デフォルトマージンをリセットして下部のみ余白を設定 */
+  font-size: 2.5rem; /* 大きく目立つヘッディングサイズ */
+  font-weight: 600; /* セミボールドで可読性を向上 */
+}
+
+/* ヘッダー説明文のスタイリング */
+.app-header p {
+  margin: 0; /* デフォルトマージンをリセット */
+  font-size: 1.1rem; /* 本文より少し大きめのフォントサイズ */
+  opacity: 0.9; /* 軽い透明度で階層を表現 */
+}
+
+/* メインコンテンツエリア - 主要コンテンツの配置とスペーシング */
+.app-main {
+  display: flex; /* フレックスボックスレイアウトを使用 */
+  flex-direction: column; /* 縦方向に要素を配置 */
+  gap: 2rem; /* セクション間の一貫したスペーシング */
+}
+
+/* エラーメッセージの表示 - ユーザーへのフィードバック */
+.error-message {
+  background-color: #fee2e2; /* 薄い赤色背景でエラーを視覚的に示す */
+  color: #b91c1c; /* 濃い赤色テキストでコントラストを確保 */
+  padding: 1rem; /* 内側の余白で読みやすさを向上 */
+  margin-bottom: 1rem; /* 下部余白で次の要素との間隔を調整 */
+  border-radius: 8px; /* 角を丸くして柔らかい印象に */
+  border: 1px solid #fecaca; /* わずかに濃い赤のボーダーで境界を明確化 */
+}
+
+/* エラーメッセージ内のテキストスタイリング */
+.error-message p {
+  margin: 0 0 0.5rem 0; /* 下部のみ余白を設定 */
+  font-weight: 500; /* ミディアムウェイトで重要性を強調 */
+}
+
+/* 再試行ボタン - エラー回復のためのアクション */
+.retry-button {
+  background-color: #dc2626; /* エラーコンテキストに合わせた赤いテーマ */
+  color: white; /* 高コントラストの白いテキスト */
+  border: none; /* デフォルトボーダーを削除 */
+  padding: 0.5rem 1rem; /* 快適なクリック領域を確保 */
+  border-radius: 6px; /* 角を丸くしてモダンな外観に */
+  cursor: pointer; /* クリック可能であることを示すポインターカーソル */
+  font-size: 0.875rem; /* 本文より小さめのフォントサイズ */
+  transition: background-color 0.2s; /* スムーズな背景色変化 */
+}
+
+/* 再試行ボタンのホバー効果 */
+.retry-button:hover {
+  background-color: #b91c1c; /* ホバー時により濃い赤色に変化 */
+}
+
+/* Todo追加フォーム - 新しいTodoアイテムを作成するためのフォーム */
+.add-todo-form {
+  background: white; /* 清潔感のある白背景 */
+  padding: 2rem; /* 十分な内側余白でコンテンツを包む */
+  border-radius: 12px; /* 角を丸くしてモダンな外観に */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 軽いシャドウで視覚的な分離を作る */
+  border: 1px solid #e5e7eb; /* 薄いグレーのボーダーで境界を定義 */
+}
+
+/* フォームタイトルのスタイリング */
+.add-todo-form h2 {
+  margin: 0 0 1.5rem 0; /* 下部のみ余白を設定 */
+  font-size: 1.5rem; /* 目立ちすぎない程度の大きさ */
+  color: #374151; /* 良いコントラストを持つダークグレー */
+}
+
+/* 入力グループコンテナ - ラベルと入力フィールドをグループ化 */
+.input-group {
+  margin-bottom: 1.5rem; /* フォームフィールド間のスペーシング */
+}
+
+/* フォームラベルのスタイリング */
+.input-group label {
+  display: block; /* ブロック表示でより良いタッチターゲットを提供 */
+  margin-bottom: 0.5rem; /* ラベルと入力フィールド間のスペーシング */
+  font-weight: 500; /* ミディアムウェイトで重要性を強調 */
+  color: #374151; /* フォームタイトルと一貫した色 */
+}
+
+/* 入力フィールドのスタイリング - タイトルと説明入力 */
+.title-input,
+.description-input {
+  width: 100%; /* 親要素の全幅を使用 */
+  padding: 0.75rem; /* 快適な入力エリアを確保 */
+  box-sizing: border-box; /* パディングを幅計算に含める */
+  border: 2px solid #d1d5db; /* 薄いグレーのボーダー */
+  border-radius: 8px; /* 角を丸くしてモダンな外観に */
+  font-size: 1rem; /* 読みやすいフォントサイズ */
+  transition: border-color 0.2s, box-shadow 0.2s; /* フォーカス状態のスムーズな変化 */
+}
+
+/* 入力フィールドのフォーカス状態 - 視覚的フィードバックを強化 */
+.title-input:focus,
+.description-input:focus {
+  outline: none; /* デフォルトブラウザアウトラインを削除 */
+  border-color: #667eea; /* ブランドカラーでフォーカスを示す */
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); /* 軽いグロー効果 */
+}
+
+/* 説明用テキストエリアの特別なスタイリング */
+.description-input {
+  resize: vertical; /* 縦方向のリサイズのみ許可 */
+  min-height: 80px; /* 使いやすさのための最小高さ */
+}
+
+/* 追加ボタン - 主要アクションボタン */
+.add-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* ヘッダーと一致するグラデーション */
+  color: white; /* 高コントラストの白いテキスト */
+  border: none; /* デフォルトボーダーを削除 */
+  padding: 0.875rem 2rem; /* 快適なクリック領域を確保 */
+  border-radius: 8px; /* 角を丸くしてモダンな外観に */
+  font-size: 1rem; /* 明確で読みやすいボタンテキスト */
+  font-weight: 500; /* ミディアムウェイトで重要性を強調 */
+  cursor: pointer; /* クリック可能であることを示すポインターカーソル */
+  transition: transform 0.2s, box-shadow 0.2s; /* スムーズなアニメーション */
+}
+
+/* 追加ボタンのホバー効果 - 軽いリフトアニメーション */
+.add-button:hover:not(:disabled) {
+  transform: translateY(-1px); /* 軽い上向きの動き */
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); /* 強化されたシャドウ */
+}
+
+/* 追加ボタンの無効状態 */
+.add-button:disabled {
+  opacity: 0.6; /* 無効状態の視覚的表示 */
+  cursor: not-allowed; /* 無効状態に適したカーソル */
+  transform: none; /* 無効時はホバー効果を無効化 */
+}
+
+/* Todoリストコンテナ - Todoアイテムのメインコンテナ */
+.todo-list {
+  background: white; /* 清潔感のある白背景 */
+  border-radius: 12px; /* 角を丸くしてモダンな外観に */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 軽いシャドウで立体感を付与 */
+  border: 1px solid #e5e7eb; /* 薄いグレーのボーダー */
+  overflow: hidden; /* ボーダー半径を破らないようにコンテンツを隠す */
+}
+
+/* ローディングと空状態の表示 */
+.todo-list.loading,
+.todo-list.empty {
+  padding: 3rem; /* 空状態用の十分なパディング */
+  text-align: center; /* テキストを中央寄せ */
+  color: #6b7280; /* 重要度の低い情報用の薄いグレー */
+  font-size: 1.1rem; /* わずかに大きめのフォントサイズ */
+}
+
+/* Todo統計ヘッダー - Todoの数を表示 */
+.todo-stats {
+  padding: 1rem 1.5rem; /* 快適な読書のためのパディング */
+  background-color: #f9fafb; /* コンテンツから分離する薄い背景 */
+  border-bottom: 1px solid #e5e7eb; /* セクション境界を定義 */
+  font-size: 0.875rem; /* 副次的情報用の小さいテキスト */
+  color: #6b7280; /* 薄いグレーで重要度を下げる */
+}
+
+/* 統計パラグラフのマージンリセット */
+.todo-stats p {
+  margin: 0;
+}
+
+/* Todoセクションコンテナ - 関連するTodoをグループ化 */
+.todo-section {
+  padding: 0; /* パディングなし - 子要素にスペーシングを委ねる */
+}
+
+/* セクションタイトル - 未完了/完了Todoのヘッダー */
+.section-title {
+  background-color: #f3f4f6; /* セクション分離のための薄い背景 */
+  padding: 1rem 1.5rem; /* 快適な読書のためのパディング */
+  margin: 0; /* デフォルトマージンをリセット */
+  font-size: 1.1rem; /* 目立ちすぎない程度の大きさ */
+  font-weight: 600; /* セミボールドで重要性を強調 */
+  color: #374151; /* ダークグレーで良いコントラスト */
+  border-bottom: 1px solid #e5e7eb; /* セクション分離のためのボーダー */
+}
+
+/* 完了セクションタイトル - 完了Todoの異なる色表示 */
+.completed-section .section-title {
+  background-color: #f0f9ff; /* 薄い青背景 */
+  color: #0369a1; /* 完了を示す青いテキスト */
+}
+
+/* 個別Todoアイテム - 各Todoアイテムのスタイリング */
+.todo-item {
+  display: flex; /* チェックボックス、コンテンツ、アクションの適切な配置 */
+  align-items: flex-start; /* 複数行コンテンツに対して上端揃え */
+  padding: 1.5rem; /* 快適な余白 */
+  gap: 1rem; /* 要素間の一貫したスペーシング */
+  border-bottom: 1px solid #e5e7eb; /* アイテム間の視覚的分離 */
+  transition: background-color 0.2s; /* スムーズな背景色変化 */
+}
+
+/* Todoアイテムのホバー効果 */
+.todo-item:hover {
+  background-color: #f9fafb; /* ホバー時の薄いグレー背景 */
+}
+
+/* 最後のTodoアイテムからボーダーを削除 */
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+/* 完了済みTodoアイテム - 完了の視覚的表示 */
+.todo-item.completed {
+  opacity: 0.7; /* 完了アイテムの透明度を下げる */
+}
+
+/* Todoチェックボックスのスタイリング */
+.todo-checkbox {
+  width: 20px; /* 一貫性のための固定幅 */
+  height: 20px; /* 一貫性のための固定高さ */
+  margin-top: 2px; /* テキストベースラインとの位置合わせ */
+  cursor: pointer; /* より良いUXのためのポインターカーソル */
+  accent-color: #667eea; /* ブランドに合わせたカスタムアクセントカラー */
+}
+
+/* Todoコンテンツコンテナ - メインコンテンツエリア */
+.todo-content {
+  flex: 1; /* 利用可能スペースを占有 */
+  min-width: 0; /* コンテンツの縮小と折り返しを許可 */
+}
+
+/* Todoタイトルのスタイリング */
+.todo-title {
+  margin: 0 0 0.5rem 0; /* スペーシングとタイポグラフィ */
+  font-size: 1.2rem; /* やや大きめのフォントサイズ */
+  font-weight: 500; /* ミディアムウェイトで重要性を強調 */
+  color: #111827; /* 主要コンテンツ用のダークカラー */
+  word-wrap: break-word; /* 長いタイトルの適切な折り返し */
+}
+
+/* 完了Todoタイトル - 取り消し線効果 */
+.todo-item.completed .todo-title {
+  text-decoration: line-through; /* 完了の視覚的表示 */
+  color: #6b7280; /* 完了アイテム用の薄い色 */
+}
+
+/* Todo説明のスタイリング */
+.todo-description {
+  margin: 0 0 1rem 0; /* 読みやすさのためのスペーシング */
+  color: #6b7280; /* 副次的コンテンツ用の小さく薄いテキスト */
+  font-size: 0.95rem; /* 本文より小さめのフォントサイズ */
+  line-height: 1.5; /* 読みやすさのための行間 */
+  word-wrap: break-word; /* 長い説明の適切な折り返し */
+}
+
+/* Todoメタデータコンテナ - 作成/更新日時 */
+.todo-meta {
+  display: flex; /* 水平レイアウト */
+  gap: 1rem; /* 要素間のスペーシング */
+  flex-wrap: wrap; /* 小さい画面での折り返しを許可 */
+}
+
+/* Todo日付スタンプ - 作成・更新時刻 */
+.todo-date {
+  font-size: 0.8rem; /* タイムスタンプ用の小さくて薄いテキスト */
+  color: #9ca3af; /* 薄いグレー */
+  background-color: #f3f4f6; /* 分離のための軽い背景 */
+  padding: 0.25rem 0.5rem; /* 小さなパディング */
+  border-radius: 4px; /* 軽く角を丸く */
+}
+
+/* 削除ボタンのスタイリング */
+.delete-button {
+  background: none; /* デフォルトボタンスタイリングをリセット */
+  border: none; /* ボーダーを削除 */
+  font-size: 1.2rem; /* 絵文字サイズと位置調整 */
+  padding: 0.5rem; /* タッチターゲット用のパディング */
+  border-radius: 6px; /* 角を丸く */
+  margin-top: -2px; /* 視覚的位置合わせのための軽いオフセット */
+  cursor: pointer; /* ポインターカーソルとスムーズな変化 */
+  transition: background-color 0.2s; /* 背景色の滑らかな変化 */
+}
+
+/* 削除ボタンのホバー効果 */
+.delete-button:hover {
+  background-color: #fee2e2; /* 危険性を示す薄い赤背景 */
+}
+
+/* フッターセクション - アプリケーションフッター */
+.app-footer {
+  text-align: center; /* 中央寄せレイアウト */
+  margin-top: 3rem; /* 上部に十分な余白 */
+  padding: 1.5rem; /* 内側の余白 */
+  color: #6b7280; /* 副次的情報用の薄いテキスト */
+  font-size: 0.9rem; /* 小さめのフォントサイズ */
+  border-top: 1px solid #e5e7eb; /* 分離のための上部ボーダー */
+}
+
+/* レスポンシブデザイン - モバイルとタブレット対応 */
+@media (max-width: 768px) {
+  /* モバイル用のアプリコンテナ調整 */
+  .app {
+    padding: 10px; /* 小さい画面用の縮小パディング */
+  }
+
+  /* ヘッダーテキストサイズ調整 */
+  .app-header h1 {
+    font-size: 2rem; /* モバイル用の小さめヘッディング */
+  }
+
+  .app-header p {
+    font-size: 1rem; /* 小さめの説明テキスト */
+  }
+
+  /* フォームとリストのパディング調整 */
+  .add-todo-form,
+  .todo-list {
+    padding: 1rem; /* 小さい画面用の縮小パディング */
+  }
+
+  /* モバイル用のTodoアイテムレイアウト変更 */
+  .todo-item {
+    padding: 1rem; /* 縮小パディング */
+    flex-direction: column; /* 要素を縦に積み重ね */
+    align-items: stretch; /* より良いタッチターゲットのために全幅使用 */
+    gap: 0.75rem; /* 要素間の縮小ギャップ */
+  }
+
+  /* モバイル用のチェックボックス位置調整 */
+  .todo-checkbox {
+    align-self: flex-start; /* より良いレイアウトのために開始位置に揃える */
+  }
+
+  /* メタデータスペーシング調整 */
+  .todo-meta {
+    gap: 0.5rem; /* モバイル用の縮小ギャップ */
+  }
+
+  /* モバイル用の削除ボタン位置調整 */
+  .delete-button {
+    align-self: flex-end; /* より良いUXのために終端に揃える */
+    margin-top: 0.5rem; /* コンテンツからのスペーシング */
+  }
+}
+
+/* アニメーション - スムーズな変化とマイクロインタラクション */
+
+/* 新しいTodoアイテム用のフェードインアニメーション */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* 透明から開始 */
+    transform: translateY(10px); /* 少し下の位置から開始 */
+  }
+  to {
+    opacity: 1; /* 完全に表示で終了 */
+    transform: translateY(0); /* 通常位置で終了 */
+  }
+}
+
+/* Todoアイテムにフェードインアニメーションを適用 */
+.todo-item {
+  animation: fadeIn 0.3s ease-out; /* スムーズな登場アニメーション */
+}
+
+/* フォーカス管理 - アクセシビリティとキーボードナビゲーション */
+
+/* アクセシビリティのためのグローバルフォーカスアウトライン */
+*:focus {
+  outline: 2px solid #667eea; /* ブランドカラーのアウトライン */
+  outline-offset: 2px; /* 要素からのスペーシング */
+}
+
+/* フォーム要素からアウトラインを削除（個別にフォーカス処理） */
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* 追加ボタンのカスタムフォーカススタイル */
+.add-button:focus {
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3); /* 軽いグロー効果 */
+}
+
+/* 削除ボタンのカスタムフォーカススタイル */
+.delete-button:focus {
+  background-color: #fee2e2; /* フォーカス用の薄い赤背景 */
+}

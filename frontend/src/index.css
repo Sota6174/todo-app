@@ -1,15 +1,279 @@
+/* グローバルスタイル - アプリ全体の基本設定と共通ルール */
+
+/* CSS変数定義 - 一貫したデザインシステムのためのカラーパレットと設定値 */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* カラーパレット - ブランドカラーとテーマカラーの定義 */
+  --primary-color: #667eea; /* メインブランドカラー（青紫） */
+  --primary-dark: #764ba2; /* プライマリーカラーの濃いバリエーション */
+  --secondary-color: #f3f4f6; /* セカンダリーカラー（薄いグレー） */
+  --text-primary: #111827; /* 主要テキスト用の濃いグレー */
+  --text-secondary: #6b7280; /* 副次的テキスト用の中間グレー */
+  --text-muted: #9ca3af; /* 補足情報用の薄いグレー */
+  --background: #f9fafb; /* アプリ全体の背景色（非常に薄いグレー） */
+  --white: #ffffff; /* 純白（コンテナ背景など） */
+  --border: #e5e7eb; /* ボーダー用の薄いグレー */
+  --error: #dc2626; /* エラー表示用の赤色 */
+  --success: #059669; /* 成功表示用の緑色 */
+
+  /* フォント設定 - タイポグラフィの基本ルール */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* システムフォントを優先してパフォーマンスとネイティブ感を向上 */
+  line-height: 1.6; /* 読みやすさを向上させる行間設定 */
+  font-weight: 400; /* 通常のフォントウェイト */
+  font-synthesis: none; /* フォント合成を無効化してパフォーマンス向上 */
+  text-rendering: optimizeLegibility; /* テキストレンダリングを読みやすさ優先に最適化 */
+  -webkit-font-smoothing: antialiased; /* WebKitベースブラウザでのフォントスムージング */
+  -moz-osx-font-smoothing: grayscale; /* Firefoxでのフォントスムージング */
+
+  /* レスポンシブブレークポイント - 一貫したレスポンシブ対応のための基準値 */
+  --mobile: 768px; /* モバイルデバイスの境界値 */
+  --tablet: 1024px; /* タブレットデバイスの境界値 */
 }
 
+/* ボックスモデルの統一 - すべての要素でbox-sizingを統一 */
+* {
+  box-sizing: border-box; /* パディングとボーダーを要素の幅に含める */
+}
+
+/* 疑似要素も同様にボックスモデルを統一 */
+*::before,
+*::after {
+  box-sizing: border-box; /* 疑似要素も同じボックスモデルを適用 */
+}
+
+/* HTML要素の基本設定 */
+html {
+  scroll-behavior: smooth; /* アンカーリンクなどのスクロールを滑らかに */
+}
+
+/* Body要素の基本設定 - アプリ全体の土台となるスタイル */
 body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+  margin: 0; /* デフォルトマージンをリセット */
+  padding: 0; /* デフォルトパディングをリセット */
+  min-width: 320px; /* 最小幅を設定して極小画面でのレイアウト崩れを防止 */
+  min-height: 100vh; /* 最小高さを画面全体に設定 */
+  background-color: var(--background); /* CSS変数で定義された背景色を適用 */
+  color: var(--text-primary); /* CSS変数で定義された主要テキスト色を適用 */
+  font-family: inherit; /* :rootで定義されたフォントファミリーを継承 */
+  line-height: inherit; /* :rootで定義された行間を継承 */
+}
+
+/* フォーカス管理 - アクセシビリティとキーボードナビゲーションの向上 */
+:focus-visible {
+  outline: 2px solid var(--primary-color); /* キーボードフォーカス時のアウトライン */
+  outline-offset: 2px; /* アウトラインと要素の間隔 */
+}
+
+/* ボタン要素のリセット - デフォルトスタイルを除去して一貫性を確保 */
+button {
+  border: none; /* デフォルトボーダーを削除 */
+  padding: 0; /* デフォルトパディングを削除 */
+  background: none; /* デフォルト背景を削除 */
+  cursor: pointer; /* ポインターカーソルでクリック可能であることを示す */
+  font-family: inherit; /* 親要素のフォントファミリーを継承 */
+}
+
+/* 入力フィールドのリセット - フォーム要素の一貫性を確保 */
+input,
+textarea,
+select {
+  font-family: inherit; /* 親要素のフォントファミリーを継承 */
+  font-size: inherit; /* 親要素のフォントサイズを継承 */
+  line-height: inherit; /* 親要素の行間を継承 */
+}
+
+/* リンク要素のスタイリング - ブランドに合わせた色設定 */
+a {
+  color: var(--primary-color); /* ブランドカラーでリンクを表示 */
+  text-decoration: none; /* デフォルトの下線を削除 */
+}
+
+/* リンクホバー効果 */
+a:hover {
+  text-decoration: underline; /* ホバー時に下線を表示 */
+}
+
+/* 見出し要素のリセット - 一貫した見出しスタイル */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0; /* デフォルトマージンをリセット */
+  font-weight: 600; /* セミボールドで重要性を強調 */
+  line-height: 1.2; /* 見出し用の詰まった行間 */
+  color: var(--text-primary); /* 主要テキストカラーを適用 */
+}
+
+/* 段落要素のリセット */
+p {
+  margin: 0; /* デフォルトマージンをリセット */
+  line-height: 1.6; /* 読みやすい行間を設定 */
+}
+
+/* リスト要素のリセット - デフォルトスタイルを除去 */
+ul, ol {
+  margin: 0; /* デフォルトマージンをリセット */
+  padding: 0; /* デフォルトパディングをリセット */
+  list-style: none; /* リストマーカーを削除 */
+}
+
+/* スクロールバーのカスタマイズ - WebKitベースブラウザ用 */
+::-webkit-scrollbar {
+  width: 8px; /* スクロールバーの幅 */
+  height: 8px; /* 水平スクロールバーの高さ */
+}
+
+/* スクロールバーのトラック（背景）部分 */
+::-webkit-scrollbar-track {
+  background: var(--secondary-color); /* 薄いグレー背景 */
+}
+
+/* スクロールバーのつまみ部分 */
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted); /* 薄いグレーでつまみを表示 */
+  border-radius: 4px; /* 角を丸くしてモダンな外観に */
+}
+
+/* スクロールバーのつまみホバー効果 */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary); /* ホバー時により濃いグレーに */
+}
+
+/* プリロード防止 - 初期読み込み時のアニメーション無効化 */
+.preload * {
+  animation-duration: 0s !important; /* アニメーション時間を0に */
+  animation-delay: 0s !important; /* アニメーション遅延を0に */
+  transition-duration: 0s !important; /* トランジション時間を0に */
+  transition-delay: 0s !important; /* トランジション遅延を0に */
+}
+
+/* ユーティリティクラス - 特殊な用途のためのヘルパークラス */
+
+/* スクリーンリーダー専用テキスト - 視覚的に隠すが読み上げは行う */
+.sr-only {
+  position: absolute; /* 絶対位置指定 */
+  width: 1px; /* 最小幅 */
+  height: 1px; /* 最小高さ */
+  padding: 0; /* パディングなし */
+  margin: -1px; /* 負のマージンで完全に隠す */
+  overflow: hidden; /* コンテンツをクリップ */
+  clip: rect(0, 0, 0, 0); /* 古いブラウザ対応のクリッピング */
+  white-space: nowrap; /* 改行を防ぐ */
+  border: 0; /* ボーダーなし */
+}
+
+/* 視覚的に隠すクラス - よりモダンなアプローチ */
+.visually-hidden {
+  clip: rect(0 0 0 0); /* 要素をクリップして隠す */
+  clip-path: inset(50%); /* モダンブラウザ用のクリッピング */
+  height: 1px; /* 最小高さ */
+  overflow: hidden; /* コンテンツを隠す */
+  position: absolute; /* 絶対位置指定 */
+  white-space: nowrap; /* 改行を防ぐ */
+  width: 1px; /* 最小幅 */
+}
+
+/* アニメーション定義 - 再利用可能なアニメーション効果 */
+
+/* パルスアニメーション - ローディング状態用 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1; /* 開始と終了は完全表示 */
+  }
+  50% {
+    opacity: 0.5; /* 中間点で半透明 */
+  }
+}
+
+/* パルスアニメーションを適用するクラス */
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; /* 滑らかなパルス効果 */
+}
+
+/* フェードインアニメーション - 要素の登場効果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* 透明から開始 */
+    transform: translateY(10px); /* 少し下の位置から開始 */
+  }
+  to {
+    opacity: 1; /* 完全表示で終了 */
+    transform: translateY(0); /* 通常位置で終了 */
+  }
+}
+
+/* フェードインアニメーションを適用するクラス */
+.fade-in {
+  animation: fadeIn 0.3s ease-out; /* スムーズなフェードイン */
+}
+
+/* スライドダウンアニメーション - 上から下への登場効果 */
+@keyframes slideDown {
+  from {
+    opacity: 0; /* 透明から開始 */
+    transform: translateY(-10px); /* 少し上の位置から開始 */
+  }
+  to {
+    opacity: 1; /* 完全表示で終了 */
+    transform: translateY(0); /* 通常位置で終了 */
+  }
+}
+
+/* スライドダウンアニメーションを適用するクラス */
+.slide-down {
+  animation: slideDown 0.2s ease-out; /* 素早いスライドダウン */
+}
+
+/* 印刷用スタイル - 印刷時の最適化 */
+@media print {
+  /* 印刷時の基本設定 - インクを節約し読みやすさを向上 */
+  * {
+    background: transparent !important; /* 背景色を透明に */
+    color: black !important; /* テキストを黒に */
+    box-shadow: none !important; /* シャドウを削除 */
+    text-shadow: none !important; /* テキストシャドウを削除 */
+  }
+
+  /* 印刷時のBody設定 */
+  body {
+    font-size: 12pt; /* 印刷に適したフォントサイズ */
+    line-height: 1.5; /* 印刷に適した行間 */
+  }
+
+  /* 見出しの改ページ設定 */
+  h1, h2, h3 {
+    page-break-after: avoid; /* 見出し後の改ページを避ける */
+  }
+
+  /* 印刷時に非表示にする要素 - インタラクティブ要素を隠す */
+  .app-header,
+  .app-footer,
+  .add-todo-form,
+  .delete-button,
+  .retry-button {
+    display: none !important; /* 印刷時に表示しない */
+  }
+}
+
+/* ダークモード対応 - システム設定に基づく自動切り替え */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* ダークモード用のカラーパレット再定義 */
+    --background: #111827; /* 濃いグレー背景 */
+    --white: #1f2937; /* ダークモード用の「白」（実際は濃いグレー） */
+    --text-primary: #f9fafb; /* 薄いグレーをメインテキストに */
+    --text-secondary: #d1d5db; /* 中間グレーを副次テキストに */
+    --text-muted: #9ca3af; /* 薄いグレーを補足テキストに */
+    --border: #374151; /* 濃いグレーをボーダーに */
+    --secondary-color: #374151; /* セカンダリーカラーも濃いグレーに */
+  }
+}
+
+/* アクセシビリティ配慮 - 動きを減らす設定に対応 */
+@media (prefers-reduced-motion: reduce) {
+  /* 動きを減らす設定が有効な場合のアニメーション無効化 */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important; /* アニメーション時間を最小に */
+    animation-iteration-count: 1 !important; /* アニメーション繰り返しを1回のみに */
+    transition-duration: 0.01ms !important; /* トランジション時間を最小に */
+    scroll-behavior: auto !important; /* スムーズスクロールを無効化 */
+  }
 }
